@@ -1,0 +1,56 @@
+backend:
+  name: github
+  repo: YOUR-GITHUB-USERNAME/rio-investment   # change this
+  branch: main
+media_folder: images/uploads
+public_folder: /images/uploads
+collections:
+  - name: site
+    label: Website
+    files:
+      - name: content
+        label: All page content
+        file: content/site.json
+        format: json
+        fields:
+          - {name: company, label: Company name, widget: string}
+          - {name: logo, label: Logo, widget: image, required: false}
+          - name: hero
+            label: Top banner
+            widget: object
+            fields:
+              - {name: title, label: Headline, widget: string}
+              - {name: subtitle, label: Sub-headline, widget: text}
+              - {name: image, label: Background image, widget: image, required: false}
+              - {name: cta, label: Button text, widget: string}
+          - name: about
+            label: About
+            widget: object
+            fields:
+              - {name: title, label: Title, widget: string}
+              - {name: text, label: Text, widget: text}
+              - {name: image, label: Image, widget: image, required: false}
+          - name: stats
+            label: Key numbers
+            widget: list
+            fields: [{name: value, label: Number, widget: string}, {name: label, label: Label, widget: string}]
+          - name: services
+            label: Services
+            widget: list
+            fields: [{name: title, label: Title, widget: string}, {name: text, label: Description, widget: text}]
+          - name: projects
+            label: Projects
+            widget: list
+            fields: [{name: title, label: Title, widget: string}, {name: text, label: Description, widget: text}, {name: image, label: Photo, widget: image, required: false}]
+          - name: team
+            label: Team
+            widget: list
+            fields: [{name: name, label: Name, widget: string}, {name: role, label: Role, widget: string}, {name: photo, label: Photo, widget: image, required: false}]
+          - name: contact
+            label: Contact
+            widget: object
+            fields:
+              - {name: email, label: Email, widget: string}
+              - {name: phone, label: Phone, widget: string}
+              - {name: address, label: Address, widget: string}
+              - {name: formAction, label: Form link (Formspree), widget: string}

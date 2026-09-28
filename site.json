@@ -1,0 +1,23 @@
+{
+  "company": "Rio Investment Ltd",
+  "logo": "",
+  "hero": {"title": "Capital that moves with purpose", "subtitle": "Rio Investment Ltd builds and manages diversified portfolios in real estate, equities and enterprise growth.", "image": "", "cta": "Speak with an adviser"},
+  "about": {"title": "About Rio Investment", "text": "Replace this with your company story: when you were founded, who you serve, and what makes your approach different.", "image": ""},
+  "stats": [{"value": "10+", "label": "Years in business"}, {"value": "120", "label": "Active clients"}, {"value": "35", "label": "Projects funded"}],
+  "services": [
+    {"title": "Portfolio management", "text": "Tailored investment plans matched to your goals and risk comfort."},
+    {"title": "Real estate investment", "text": "Residential and commercial property sourcing, funding and management."},
+    {"title": "Business financing", "text": "Growth capital and partnerships for established small and medium businesses."},
+    {"title": "Advisory", "text": "Clear, independent guidance on saving, planning and wealth growth."}
+  ],
+  "projects": [
+    {"title": "Project one", "text": "Short description of the investment and its outcome.", "image": ""},
+    {"title": "Project two", "text": "Short description of the investment and its outcome.", "image": ""},
+    {"title": "Project three", "text": "Short description of the investment and its outcome.", "image": ""}
+  ],
+  "team": [
+    {"name": "Full Name", "role": "Managing Director", "photo": ""},
+    {"name": "Full Name", "role": "Head of Investments", "photo": ""}
+  ],
+  "contact": {"email": "info@example.com", "phone": "+1 000 000 0000", "address": "Your street, town, country", "formAction": "https://formspree.io/f/YOUR_FORM_ID"}
+}

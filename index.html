@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rio Investment Ltd</title>
+<meta name="description" content="Rio Investment Ltd: portfolio management, real estate, business financing and advisory.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0c1f2c;--water:#0e6e7e;--foam:#e6f0f1;--gold:#b8902f;--bg:#fbfcfc;--line:#d5e0e2;--serif:'Newsreader',Georgia,serif;--sans:'Work Sans',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:400 1.05rem/1.65 var(--sans);color:var(--ink);background:var(--bg)}
+h1,h2,h3{font-family:var(--serif);line-height:1.15}
+h2{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:1.5rem}
+h3{font-size:1.35rem;margin-bottom:.4rem}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1080px;margin:auto;padding:0 1.25rem}
+section{padding:5rem 0}
+header{position:sticky;top:0;z-index:5;background:rgba(251,252,252,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;min-height:64px;flex-wrap:wrap}
+.brand{font:700 1.3rem var(--serif);text-decoration:none;display:flex;align-items:center;gap:.6rem}
+.brand img{height:36px}
+nav a{margin-left:1.2rem;text-decoration:none;font-weight:500;font-size:.95rem}
+nav a:hover{color:var(--water)}
+.hero{background:var(--ink);color:#fff;padding:7rem 0 6rem;background-size:cover;background-position:center;position:relative}
+.hero.img::before{content:"";position:absolute;inset:0;background:rgba(12,31,44,.72)}
+.hero .wrap{position:relative;max-width:820px}
+.hero h1{font-size:clamp(2.6rem,7vw,4.8rem);margin-bottom:1.2rem}
+.hero p{font-size:1.2rem;max-width:560px;opacity:.9;margin-bottom:2rem}
+.btn{display:inline-block;background:var(--gold);color:var(--ink);padding:.85rem 1.6rem;font-weight:600;text-decoration:none;border:0;border-radius:4px;cursor:pointer;font-size:1rem;font-family:inherit}
+.btn:hover{background:#cfa53c}
+.stats{background:var(--foam);padding:2.5rem 0}
+.stats .wrap{display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-around;text-align:center}
+.stats b{display:block;font:700 2.6rem var(--serif);color:var(--water)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.split p{max-width:60ch;white-space:pre-line}
+.ph{background:linear-gradient(135deg,var(--water),var(--ink));aspect-ratio:4/3;border-radius:6px;width:100%;object-fit:cover}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.5rem}
+.svc{border-top:3px solid var(--water);padding-top:1rem}
+.alt{background:var(--foam)}
+.card img,.card .ph{margin-bottom:1rem}
+.person{text-align:center}
+.person .ph,.person img{aspect-ratio:1;border-radius:50%;max-width:160px;margin:0 auto 1rem;display:block;object-fit:cover}
+form{display:grid;gap:1rem}
+input,textarea{font:inherit;padding:.8rem;border:1px solid var(--line);border-radius:4px;width:100%;background:#fff}
+label{font-weight:500;display:grid;gap:.3rem}
+footer{background:var(--ink);color:#cfdadd;padding:2rem 0;font-size:.9rem;text-align:center}
+@media(max-width:760px){.split{grid-template-columns:1fr}section{padding:3.5rem 0}nav a{margin:0 .8rem 0 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body>
+<header><div class="wrap"><a class="brand" href="#top" id="brand"></a>
+<nav><a href="#about">About</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#team">Team</a><a href="#contact">Contact</a></nav></div></header>
+<main id="app"></main>
+<footer><div class="wrap" id="foot"></div></footer>
+<script>
+// Tiny helper: builds elements safely (uses textContent, never innerHTML)
+function h(tag, attrs, ...kids){
+  const e=document.createElement(tag);
+  for(const k in attrs||{}){ if(attrs[k]!=null) e.setAttribute(k,attrs[k]); }
+  kids.flat().forEach(k=>e.append(k));
+  return e;
+}
+// Shows the uploaded image, or a coloured placeholder if none is set yet
+const pic=(src,alt)=> src ? h('img',{src,alt:alt||'',loading:'lazy',class:'ph'}) : h('div',{class:'ph','aria-hidden':'true'});
+
+fetch('content/site.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>{
+  document.title=d.company;
+  const brand=document.getElementById('brand');
+  if(d.logo) brand.append(h('img',{src:d.logo,alt:''}));
+  brand.append(d.company);
+
+  const app=document.getElementById('app');
+  const hero=h('section',{class:'hero'+(d.hero.image?' img':''),id:'top'},
+    h('div',{class:'wrap'},h('h1',{},d.hero.title),h('p',{},d.hero.subtitle),h('a',{class:'btn',href:'#contact'},d.hero.cta)));
+  if(d.hero.image) hero.style.backgroundImage=`url("${d.hero.image}")`;
+
+  const stats=h('div',{class:'stats'},h('div',{class:'wrap'},d.stats.map(s=>h('div',{},h('b',{},s.value),s.label))));
+
+  const about=h('section',{id:'about'},h('div',{class:'wrap split'},
+    h('div',{},h('h2',{},d.about.title),h('p',{},d.about.text)),pic(d.about.image,d.about.title)));
+
+  const services=h('section',{id:'services',class:'alt'},h('div',{class:'wrap'},h('h2',{},'What we do'),
+    h('div',{class:'grid'},d.services.map(s=>h('div',{class:'svc'},h('h3',{},s.title),h('p',{},s.text))))));
+
+  const projects=h('section',{id:'projects'},h('div',{class:'wrap'},h('h2',{},'Selected projects'),
+    h('div',{class:'grid'},d.projects.map(p=>h('article',{class:'card'},pic(p.image,p.title),h('h3',{},p.title),h('p',{},p.text))))));
+
+  const team=h('section',{id:'team',class:'alt'},h('div',{class:'wrap'},h('h2',{},'Our team'),
+    h('div',{class:'grid'},d.team.map(t=>h('div',{class:'person'},pic(t.photo,t.name),h('h3',{},t.name),h('p',{},t.role))))));
+
+  const c=d.contact;
+  const form=h('form',{action:c.formAction,method:'POST'},
+    h('label',{},'Name',h('input',{name:'name',required:''})),
+    h('label',{},'Email',h('input',{name:'email',type:'email',required:''})),
+    h('label',{},'Message',h('textarea',{name:'message',rows:'5',required:''})),
+    h('button',{class:'btn',type:'submit'},'Send message'));
+  const contact=h('section',{id:'contact'},h('div',{class:'wrap split'},
+    h('div',{},h('h2',{},'Get in touch'),h('p',{},'Tell us about your goals and we will reply within two working days.'),
+      h('p',{},h('a',{href:'mailto:'+c.email},c.email)),h('p',{},c.phone),h('p',{},c.address)),form));
+
+  app.append(hero,stats,about,services,projects,team,contact);
+  document.getElementById('foot').textContent=`© ${new Date().getFullYear()} ${d.company}. All rights reserved.`;
+}).catch(()=>{document.getElementById('app').textContent='Content failed to load. Check content/site.json.'});
+</script></body></html>
